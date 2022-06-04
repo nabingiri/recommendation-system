@@ -5,4 +5,4 @@ The files are present in the train and predict folders. For details on what thes
 * train : trains the model, further details are in README file inside the train folder.
 * predict : predicts the rating, further details are in README file inside the predict folder.
 
-**The thesis is available [here](https://ucmo.alma.exlibrisgroup.com/view/delivery/01UCMO_INST/12110769570005571) to read and to watch the Three Minute Thesis presentation, please go [here](https://youtu.be/KVL9eQ35YSY).**
+**The thesis is available [here](https://doi.org/10.5281/zenodo.6591586) to read and to watch the Three Minute Thesis presentation, please go [here](https://youtu.be/KVL9eQ35YSY).**
