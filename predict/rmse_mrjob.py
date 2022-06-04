@@ -1,7 +1,7 @@
 import math
-number = []
-score = []
-pred = []
+number = list()
+score = list()
+pred = list()
 
 
 with open("output.txt", "r") as f:
@@ -17,8 +17,8 @@ res = sorted(b, key=lambda x: x[0])
 for i in res:
     pred.append(i[1])
 total = 0.0
-original = []
-tmp = []
+original = list()
+tmp = list()
 
 file = open("ua.base.feature", "r")
 for line in file:
