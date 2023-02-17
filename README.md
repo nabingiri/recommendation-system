@@ -29,4 +29,16 @@ We are passionate about our research and committed to driving innovation in our 
 
 We welcome discussions and collaborations, so please do not hesitate to reach out if you have any questions or ideas to share. Thank you for your interest in our work!
 
-``Giri, Nabin. (2020). Recommendation System Using Factorization Model and MapReduce Framework (Version v1) [Zenodo]. https://doi.org/10.5281/zenodo.6591586``
+```
+@mscthesis{giri_nabin_2020_6591586,
+  author       = {Giri, Nabin},
+  title        = {{Recommendation System Using Factorization Model 
+                   and MapReduce Framework}},
+  school       = {University of Central Missouri},
+  year         = 2020,
+  month        = May,
+  note         = {{Three-minute thesis presentation available at : 
+                   https://youtu.be/KVL9eQ35YSY}},
+  doi          = {10.5281/zenodo.6591586},
+  url          = {https://doi.org/10.5281/zenodo.6591586}}
+  ```
