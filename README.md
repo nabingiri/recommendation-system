@@ -22,7 +22,7 @@ To dive deeper into my master's research thesis and explore the methods, please 
 * To watch the three-minute thesis presentation, please visit -> [3MT Video in YouTube.](https://youtu.be/KVL9eQ35YSY)
 
 # Contributors
-This project was deloped as a part of a master's thesis by Nabin Giri under the guidance of Dr. Yui Man Lui at the University of Central Missouri, Warrensburg, Missouri.
+This project was developed as a part of a master's thesis by Nabin Giri under the guidance of Dr. Yui Man Lui at the University of Central Missouri, Warrensburg, Missouri.
 
 # Citation
 We are passionate about our research and committed to driving innovation in our field. If you find our project or any of its elements useful in your own work or research, we kindly ask that you consider citing it appropriately. Your support and recognition of our efforts help to drive our research forward and make a positive impact in the field.
