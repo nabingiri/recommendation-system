@@ -1,3 +1,7 @@
+"""
+author: nabin
+
+"""
 import math
 number = list()
 score = list()

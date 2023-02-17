@@ -1,3 +1,9 @@
+"""
+author: nabin
+
+"""
+
+
 import numpy as np
 import os
 import cmath
@@ -21,21 +27,15 @@ if len(sys.argv) < 3:
 print("Predicting using Movie lens data")
 print("All data loaded in.\nLine shuffle start.")
 base_data = [(random.random(), line) for line in source_base]
-#test_data = [(random.random(), line) for line in source_test]
 print("Line Shuffle End :Data Shuffled")
 base_data.sort()
-#test_data.sort()
 with open("ua.base.shuffle", "+w") as target_base:
     for _, line in base_data:
         target_base.write(line)
-#with open("ua.test.shuffle", "+w") as target_test:
-    #for _, line in test_data:
-        #target_test.write(line)
 
 source_base.close()
-#source_test.close()
 target_base.close()
-#target_test.close()
+
 
 
 def group_shuffle(fin, fout):
@@ -146,8 +146,6 @@ class config:
             self.cfg.append((name, value))
         file.close()
 
-
-# Start : apex_svd_model.h file
 
 RANDOM_ORDER_FORMAT = 0
 USER_GROUP_FORMAT = 1
@@ -561,7 +559,6 @@ class SVDModel:
                 self.ufeedback_bias = pickle.load(file)
                 self.W_ufeedback = pickle.load(file)
 
-    # TODO : check load_from_file , save_to_file and rand_init and complete the model.h file.
 
     def sample_normal(self):
         while True:
@@ -574,7 +571,6 @@ class SVDModel:
 
     def rand_init(self):
         self.param.base_score = calc_base_score(self.param.base_score, self.mtype.active_type)
-        # TODO : The program runs for base_solver but need to update for other solvers.
         if int(self.param.num_randinit_ufactor) is not 0:
             self.W_uinit = np.copy(self.W_user[0:self.param.num_randinit_ufactor, 0:])
         else:
@@ -606,26 +602,6 @@ class SVDModel:
             pass
 
 
-
-# End : apex_svd_model.h
-
-
-class SVDBiLinearTrainer:
-    pass
-
-
-class SVDPPMultiIMFB:
-    pass
-
-
-class APLambdaGBRTTrainer:
-    pass
-
-
-class RegGBRTTrainer:
-    pass
-
-
 class parameterset:
     def __init__(self, prefixA, prefixB):
         self.prefixA = prefixA
@@ -652,7 +628,7 @@ class parameterset:
             self.__bound.append(bd - 1)
 
         if name == "wd":
-            assert (len(self.__wd) == len(self.__bound)), "setting must be exactly"
+            assert (len(self.__wd) == len(self.__bound)), "setting must be exact"
             self.__wd.append(float(value))
 
     def get_wd(self, gid, wd_default):
@@ -661,12 +637,6 @@ class parameterset:
         idx = self.__bound.index(gid)
         assert idx < len(self.__bound), "bound set err"
         return self.__wd[idx]
-
-    # for bound_item, wd_item in zip(self.__bound, self.__wd):
-    # if bound_item >= gid:
-    # return wd_item
-
-    # assert False, "bound set err"
 
 
 class Elem:
@@ -975,28 +945,19 @@ class SVDFeature:
         # when reg_method > = 3 , regularization is performed before update
         if (is_after_update and self._param.reg_global < 4) or (
                 not is_after_update and self._param.reg_global >= 4):
-            # for i in range(len(self.feature.elems)):
             for j in range((i.num_global[0])):
                 self.__reg_global(i.index_global[0])
 
         if (is_after_update and self._param.reg_method < 4) or (
                 not is_after_update and self._param.reg_method >= 4):
-            # for i in range(len(self.feature.elems)):
             for j in range((i.num_ufactor[0])):
                 uid = int(i.index_ufactor[0])
                 self.__reg_user(uid)
-                # self.vec_u = []
-                # self.vec_u.append(self._feat_user[self.feature.elems[i].index_ufactor[0]])
-                # for j in range(0, len(self.vec_u)):
-                # self.__reg_user([j].index)
 
             for k in range((i.num_ifactor[0])):
                 uid_item = int(i.index_ifactor[0])
                 self.__reg_item(uid_item)
-                # self.vec_i = []
-                # self.vec_i.append(self._feat_item[self.feature.elems[i].index_ifactor[0]])
-                # for j in range(len(self.vec_i)):
-                # self.__reg_item([j].index)
+
 
     def __calc_bias(self, i, u_bias, i_bias, g_bias):
         total = float(0.0)
@@ -1054,14 +1015,6 @@ class SVDFeature:
             if self._model.param.no_user_bias == 0:
                 self._model.u_bias[uid] += scale
 
-                # extra feature
-                # self.vec = []
-                # self.vec.append(self._feat_user[uid])
-                # for j in range(len(self.vec)):
-                # sc = float(self._param.learning_rate * err * self.vec[j])
-                # self._model.W_user[j] += sc * self.tmp_ifactor
-                # if self._model.param.no_user_bias == 0:
-                # self._model.u_bias[j] += sc
 
         for j in range(i.num_ifactor[0]):
             iid = int(i.index_ifactor[j])
@@ -1070,19 +1023,9 @@ class SVDFeature:
             self._model.W_item[iid] += np.multiply(scale, self._tmp_ufactor)
             self._model.i_bias[iid] += scale
 
-            # extra feature
-
-            # self.vec = []
-            # self.vec.append(self._feat_item[iid])
-            # for k in range(len(self.vec)):
-            # sc = float(self._param.learning_rate * err * self.vec[k] * ival)
-            # self._model.i_bias[k] += sc
-            # self._model.W_item[k] += sc * self.tmp_ufactor
 
         self._update_svdpp(err, self._tmp_ifactor)
         self._update_bias_plugin(err)
-
-    # return self.tmp_ufactor = 0.0
 
     def _get_bias_svdpp(self):
         return 0.0
@@ -1093,8 +1036,6 @@ class SVDFeature:
     def _update_bias_plugin(self, err):
         return None
 
-    def _update_svdpp(self, err, tmp_ifactor):
-        pass
 
     def _pred(self, i):
         total = float(int(self.param.base_score) + (
@@ -1189,10 +1130,8 @@ class SVDPPFeature:
 
     def _update_each(self):
         for i in range(len(self.data.elems[-1])):
-            # TODO : _update_inner(data.data[i]
             self.svd_feature.update_inner(self.data.elems[-1])
 
-    # TODO: check the below code.
     def predict(self):
         p = []
         self._prepare_ufeedback()
@@ -1202,14 +1141,6 @@ class SVDPPFeature:
 
 def create_svd_trainer():
     mtype = SVDTypeParam()
-    if mtype.extend_type == "15":
-        return SVDBiLinearTrainer()
-    if mtype.extend_type == "2":
-        return SVDPPMultiIMFB()
-    if mtype.extend_type == "30":
-        return APLambdaGBRTTrainer()
-    if mtype.extend_type == "31":
-        return RegGBRTTrainer()
     if mtype.extend_type == "1":
         return SVDFeature()
     if mtype.format_type == USER_GROUP_FORMAT or RANDOM_ORDER_FORMAT:
